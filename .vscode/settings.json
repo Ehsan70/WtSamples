@@ -40,6 +40,23 @@
         "wmenuitem": "cpp",
         "wmenu": "cpp",
         "wcompositewidget": "cpp",
-        "wtable": "cpp"
+        "wtable": "cpp",
+        "wabstractitemmodel": "cpp",
+        "wabstractitemview": "cpp",
+        "wanchor": "cpp",
+        "wboostany": "cpp",
+        "wformwidget": "cpp",
+        "witemselectionmodel": "cpp",
+        "wlineedit": "cpp",
+        "wmodelindex": "cpp",
+        "wprogressbar": "cpp",
+        "wpushbutton": "cpp",
+        "wsignalmapper": "cpp",
+        "wstackedwidget": "cpp",
+        "wstandarditemmodel": "cpp",
+        "wtablecell": "cpp",
+        "wtablecolumn": "cpp",
+        "wtablerow": "cpp",
+        "wtableview": "cpp"
     }
 }

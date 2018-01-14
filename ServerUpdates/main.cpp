@@ -30,12 +30,10 @@ class HMIApplication : public WApplication
 {
   public:
     WLineEdit *picsNum_LE;
-    WLineEdit *broadcastIP_LE;
     HMIApplication(const WEnvironment &env);
+    Wt::WText *specialValue;
+    string sharedVal = "1";
 
-    Wt::WImage *lastImage_I = new Wt::WImage(Wt::WLink("Resources/Images/pic.png"));
-
-    int sharedVal = 1;
 
   private:
     // Main Tabs
@@ -49,8 +47,6 @@ class HMIApplication : public WApplication
     // Functions that deal with Streaming
 
     Wt::WTable *capturePageTable;
-    Wt::WTable *flashControlPageTable;
-    Wt::WTable *streamingPageTable;
 };
 
 ////////////////////////////////////////////////////
@@ -59,9 +55,8 @@ class HMIApplication : public WApplication
 HMIApplication::HMIApplication(const WEnvironment &env) : WApplication(env)
 {
 
-    ///////////////////////////////////////////////
-    //The following are all formatting related
-    //////////////////////////////////////////////
+    //WApplication *app = WApplication::instance();
+    //app->enableUpdates();
 
     // TODO: Bootsrap is not found in Mazlite_Dropsizer/Resources/themes/bootstrap/2
     // load the default bootstrap3 (sub-)theme
@@ -89,6 +84,8 @@ HMIApplication::HMIApplication(const WEnvironment &env) : WApplication(env)
 
     // Sets theme for app
     setTheme(new WBootstrapTheme());
+
+    specialValue = new WText("0");
 
     // The main part of the physical layout
     Wt::WContainerWidget *container = new Wt::WContainerWidget(root());
@@ -160,18 +157,6 @@ Wt::WWidget *HMIApplication::CapturePage()
 
     // Add items to Flash section
     capturePageTable->elementAt(2, 1)->addWidget(new Wt::WText("Flash Duration"));
-
-    //cout << "parent name : " << container->parent()->objectName();    
-
-    //  for ( int i =0 ; i< container->parent()->children.size();  ++i){
-    //      cout<< "For index: "<<i<<"the name is "<<container->children.at(i)->objectName()<<endl;
-    //  }
-
-
-    // for (vector<WWidget*>::iterator it = container->children.begin(); it !=  container->children.end(); ++it){
-    //     cout<< (*it)->objectName()<<endl;
-    // }
-    
     return container;
 }
 
@@ -183,6 +168,8 @@ Wt::WWidget *HMIApplication::AnalysisPage()
 	
     Wt::WContainerWidget *container = new Wt::WContainerWidget();
     new Wt::WText("<center><h3> Analysis Results  </h3></center>", container);
+    specialValue->setText(sharedVal);
+    container->addWidget(specialValue);
     cout << "*********Analysis page. SharedVal is "<<sharedVal<<endl;
     return container;
 }
@@ -192,8 +179,10 @@ Wt::WWidget *HMIApplication::AnalysisPage()
 // Function that is called everytime Capture button is clicked
 void HMIApplication::TakePicture()
 {
-    sharedVal =2;
+    sharedVal ="2";
+    specialValue->setText(sharedVal);
     cout<< "*********Take picture. SharedVal is now " << sharedVal <<endl<<endl;
+    //WApplication::instance()->triggerUpdate();
 }
 
 
